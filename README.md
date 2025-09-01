@@ -23,10 +23,10 @@ A complete pipeline for fine-tuning GPT-OSS:20B to become a Luanti (Minetest) ex
 
 ### 🔄 **Phase 3: Baseline Evaluation (IN PROGRESS)**
 - **Gate A2 PASSED**: CUDA + Unsloth + BitsAndBytes working
-- **Gate B RUNNING**: Baseline evaluation in progress
-  - **Progress**: 7/60 items evaluated (11.7% complete)
+- **Gate B RUNNING**: Baseline evaluation in progress  
+  - **Progress**: 11/60 items evaluated (18.3% complete)
   - **GPU usage**: 12.7GB memory, 59% utilization
-  - **Performance**: Model loaded successfully, evaluation advancing
+  - **Performance**: Model loaded successfully, evaluation advancing steadily
 
 ### ⏳ **Phase 4: QLoRA Training (READY)**
 - **Training config**: Layers 19-23, LoRA r=8, attention-only
@@ -172,7 +172,7 @@ BitsAndBytes: 0.47.0    ✅ 4-bit quantization
 | Gate | Status | Details |
 |------|--------|---------|
 | **A2** | ✅ PASSED | CUDA + RTX 3090 + BitsAndBytes verified |
-| **B** | 🔄 RUNNING | 7/60 items (11.7%), 12.7GB GPU, 59% util |
+| **B** | 🔄 RUNNING | 11/60 items (18.3%), 12.7GB GPU, 59% util |
 | **C** | ⏳ READY | Training config verified, 600 items ready |
 | **D** | ⏳ READY | Multi-scale testing prepared |
 | **E** | ⏳ READY | +15pp decision framework ready |
@@ -437,7 +437,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 ## 📊 **Live Status**
 
 **Last Updated**: September 1, 2025
-**Current Phase**: Gate B baseline evaluation (7/60 items, 11.7% complete)
+**Current Phase**: Gate B baseline evaluation (11/60 items, 18.3% complete)
 **Next Milestone**: Complete baseline → Start QLoRA training
 **ETA**: Training completion within 4-6 hours
 
