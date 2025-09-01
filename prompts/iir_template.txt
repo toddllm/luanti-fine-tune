@@ -1,0 +1,12 @@
+Below is an instruction that describes a task{{INPUT_BLOCK}}. Write a response that completes the request.
+
+### Instruction:
+{instruction}
+
+{{IF_INPUT}}
+### Input:
+{input}
+{{END_IF_INPUT}}
+
+### Response:
+{output}

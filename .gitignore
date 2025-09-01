@@ -1,0 +1,48 @@
+# Environment files
+.env
+*.env
+env/versions.txt
+
+# Cache directories
+.cache/
+__pycache__/
+*.pyc
+*.pyo
+
+# Training outputs
+adapters/
+*.log
+*.pth
+*.bin
+
+# Evaluation results
+eval/results/*.json
+eval/results/*.log
+
+# Temporary files
+*.tmp
+*.temp
+data/mini5.jsonl
+
+# Model files (too large for git)
+*.safetensors
+*.gguf
+*.pt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Distribution files
+build/
+dist/
+*.egg-info/
