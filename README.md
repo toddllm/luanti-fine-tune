@@ -45,10 +45,15 @@ ssh tdeshane@toddllm 'cd ~/luanti_capability && make verifiers'
 - **Quality**: Exceptional convergence
 
 ### **Gate-D (Evaluation - Live)**
-- **Progress**: 15/60 items (25% complete)
-- **Pass@1**: 93.3% (vs 28.33% baseline)
-- **Pass@5**: 100% (perfect performance)
-- **Trend**: Consistently exceeding all targets
+
+| Checkpoint | Scale | Pass@1 | Pass@5 | Status |
+|------------|-------|--------|--------|--------|
+| 500 | 0.25 | 85.00% | **96.67%** | ✅ complete |
+| 500 | 0.50 | 91.67% | **96.67%** | ✅ complete |
+| 500 | 1.00 | 97.80% | **100.00%** | 🔄 45/60 done |
+
+**Average (completed)**: 88.3% pass@1, **96.7% pass@5**  
+**vs Baseline**: +68.37pp improvement (massively exceeds +15pp target!)
 
 ### **Gate-E (Aggregation)**
 - **Target**: ≥43.33% pass@5 (+15pp)
