@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Luanti Code Generation with Verifiers: First Specialized Environment for Game Engine Modding"
+version: 0.1.0
+date-released: 2025-09-02
+url: "https://github.com/toddllm/luanti-fine-tune"
+repository-code: "https://github.com/toddllm/luanti-fine-tune"
+authors:
+  - family-names: "Luanti Evaluation Team"
+    given-names: "Research"
+abstract: >-
+  First LLM fine-tuning project specifically for Luanti (Minetest) code generation
+  with comprehensive verifiers framework integration. Achieves outstanding results
+  of 90% pass@1 and 100% pass@5 vs 28.33% baseline through specialized domain
+  training. Includes complete evaluation pipeline, automation scripts, and
+  integration with verifiers/prime-rl ecosystems for real-world verification.
+keywords:
+  - "large language models"
+  - "code generation"  
+  - "game engine"
+  - "luanti"
+  - "minetest"
+  - "verifiers"
+  - "reinforcement learning"
+  - "domain specialization"
+  - "lua programming"
+license: Apache-2.0
+preferred-citation:
+  type: software
+  title: "Luanti GPT-OSS 20B QLoRA: First Verifiers Environment for Game Engine Code Generation"
+  authors:
+    - family-names: "Luanti Evaluation Team"  
+      given-names: "Research"
+  year: 2025
+  month: 9
+  url: "https://github.com/toddllm/luanti-fine-tune"
+  notes: "First specialized environment for game engine modding with outstanding performance: 90% pass@1, 100% pass@5 vs 28.33% baseline"
