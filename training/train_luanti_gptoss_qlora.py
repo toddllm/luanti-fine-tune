@@ -15,14 +15,26 @@ import sys
 import torch
 
 # Add prompts to path for formatter
-sys.path.append('../prompts')
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '../prompts'))
 from formatter import format_for_training
 
 from unsloth import FastLanguageModel
 from datasets import Dataset
 from trl import SFTTrainer
-from transformers import TrainingArguments
+from transformers import TrainingArguments, BitsAndBytesConfig
 import wandb
+
+# ==== CRITICAL FIX: Force eager + no compilers ====
+os.environ["TORCHDYNAMO_DISABLE"] = "1"
+os.environ["TORCHINDUCTOR_DISABLE"] = "1"
+os.environ["PYTORCH_TRITON_DISABLE"] = "1"
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+
+# ==== CRITICAL FIX: Force FP16 globally ====
+torch.set_default_dtype(torch.float32)
+torch.backends.cuda.matmul.allow_tf32 = True
+DT = torch.float16
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -42,15 +54,35 @@ class LuantiQLoRATrainer:
         logger.info(f"   Target layers: {self.config['layers']}")
     
     def load_base_model(self):
-        """Load GPT-OSS:20B base model via Unsloth 4-bit"""
+        """Load GPT-OSS:20B base model via Unsloth 4-bit - EXACT GATE B PATTERN"""
         logger.info("📥 Loading GPT-OSS:20B base model (4-bit)...")
         
-        model, tokenizer = FastLanguageModel.from_pretrained(
-            model_name=self.config['base'],
-            max_seq_length=self.config['max_len'],
-            dtype=None,
+        # --- begin: canonical loader with FP16 fix ---
+        import os
+        BASE_REPO = "unsloth/gpt-oss-20b-unsloth-bnb-4bit"   # DO NOT change to filesystem path
+        os.environ.setdefault("HF_HUB_OFFLINE", "1")
+        os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+        
+        # FP16 BitsAndBytesConfig
+        bnb_config = BitsAndBytesConfig(
             load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_compute_dtype=DT,
+            bnb_4bit_use_double_quant=True,
         )
+        
+        print("[A] from_pretrained(fp16)…", flush=True)
+        # Exact call pattern with FP16 fix:
+        model, tokenizer = FastLanguageModel.from_pretrained(
+            model_name=BASE_REPO,
+            max_seq_length=self.config['max_len'],
+            load_in_4bit=True,
+            dtype=DT,  # CRITICAL: Force FP16
+            local_files_only=True,
+            quantization_config=bnb_config,
+        )
+        print("[A1] base dtype:", model.config.torch_dtype, flush=True)
+        # --- end: canonical loader ---
         
         logger.info("✅ Base model loaded")
         return model, tokenizer
@@ -59,18 +91,32 @@ class LuantiQLoRATrainer:
         """Setup LoRA with EXACT specifications - attention only, specific layers"""
         logger.info("🔧 Setting up LoRA - ATTENTION ONLY, LAYERS 19-23")
         
+        print("[B] get_peft_model(fp16 attn-only)…", flush=True)
+        # Add LoRA adapters (attention-only; leave MoE alone)
         model = FastLanguageModel.get_peft_model(
             model,
             r=self.config['lora']['r'],
             lora_alpha=self.config['lora']['alpha'],
             lora_dropout=self.config['lora']['dropout'],
-            target_modules=self.config['lora']['target_modules'],
+            target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],  # EXACTLY attention-only
             bias="none",
-            use_gradient_checkpointing="unsloth",
+            use_gradient_checkpointing=False,  # Keep OFF for first successful run
             random_state=3407,
-            use_rslora=False,
-            loftq_config=None,
         )
+        
+        # CRITICAL FIX: Force LoRA params to FP16
+        for n, m in model.named_modules():
+            if hasattr(m, "lora_A"):
+                for k in m.lora_A.keys():
+                    m.lora_A[k].weight.data = m.lora_A[k].weight.data.to(DT)
+                    m.lora_B[k].weight.data = m.lora_B[k].weight.data.to(DT)
+        
+        # Ensure all trainable params are FP16
+        for p in model.parameters():
+            if p.requires_grad and p.dtype != DT:
+                p.data = p.data.to(DT)
+        
+        print("[B1] LoRA dtypes fixed to FP16", flush=True)
         
         # CRITICAL: Freeze adapters outside layers 19-23
         logger.info("🔒 Freezing adapters outside layers 19-23...")
