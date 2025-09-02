@@ -1,0 +1,54 @@
+[
+  {
+    "file": "local_checkpoint-1000_scale_0.25.json",
+    "checkpoint": "checkpoint-1000",
+    "scale": 0.25,
+    "pass@1": 0.85,
+    "pass@k": 0.9666666666666667,
+    "items_total": 60,
+    "started_at": "2025-09-02T09:16:22.146602",
+    "ended_at": "2025-09-02T11:53:22.146602",
+    "wall_seconds": 9420,
+    "wall_minutes": 157.0,
+    "wall_hours": 2.6166666666666667
+  },
+  {
+    "file": "local_checkpoint-500_scale_0.25.json",
+    "checkpoint": "checkpoint-500",
+    "scale": 0.25,
+    "pass@1": 0.85,
+    "pass@k": 0.9666666666666667,
+    "items_total": 60,
+    "started_at": "2025-09-02T02:38:24.738108",
+    "ended_at": "2025-09-02T05:05:24.738108",
+    "wall_seconds": 8820,
+    "wall_minutes": 147.0,
+    "wall_hours": 2.45
+  },
+  {
+    "file": "local_checkpoint-500_scale_0.5.json",
+    "checkpoint": "checkpoint-500",
+    "scale": 0.5,
+    "pass@1": 0.9166666666666666,
+    "pass@k": 0.9666666666666667,
+    "items_total": 60,
+    "started_at": "2025-09-02T05:05:49.425273",
+    "ended_at": "2025-09-02T07:12:49.425273",
+    "wall_seconds": 7620,
+    "wall_minutes": 127.0,
+    "wall_hours": 2.1166666666666667
+  },
+  {
+    "file": "local_checkpoint-500_scale_1.0.json",
+    "checkpoint": "checkpoint-500",
+    "scale": 1.0,
+    "pass@1": 0.9833333333333333,
+    "pass@k": 1.0,
+    "items_total": 60,
+    "started_at": "2025-09-02T07:13:08.769243",
+    "ended_at": "2025-09-02T09:16:08.769243",
+    "wall_seconds": 7380,
+    "wall_minutes": 123.0,
+    "wall_hours": 2.05
+  }
+]

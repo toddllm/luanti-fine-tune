@@ -1,0 +1,11 @@
+{
+  "found_log": true,
+  "wall_start": "2025-09-01T21:08:49.400863",
+  "wall_end": "2025-09-01T23:25:52.012868",
+  "wall_seconds": 8222.612004756927,
+  "steps_total": 1500,
+  "steps_seen": 0,
+  "avg_step_seconds": null,
+  "final_loss": null,
+  "loss_trace": []
+}
