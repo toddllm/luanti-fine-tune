@@ -1,0 +1,2 @@
+# tip: run this AFTER scripts/promote_best.py has produced outputs_luanti_best
+TORCHDYNAMO_DISABLE=1 /home/tdeshane/miniconda3/envs/gptoss/bin/python -u gen.py "Register a node with light_source=14, drops itself when dug."

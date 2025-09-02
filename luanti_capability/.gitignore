@@ -1,0 +1,9 @@
+# caches / big artifacts
+.cache/
+.unsloth_cache/
+unsloth_compiled_cache/
+artifacts/release_*/
+eval/results/*.log
+outputs_luanti_safe/checkpoint-*/
+outputs_luanti_best/*.bin
+outputs_luanti_best/*.safetensors
