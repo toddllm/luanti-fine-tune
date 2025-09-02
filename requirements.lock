@@ -1,0 +1,6 @@
+unsloth==2025.8.7
+transformers==4.56.0.dev0  
+torch==2.5.0+cu124
+xformers==0.0.28.post2
+peft>=0.7.0
+numpy<2.0.0
