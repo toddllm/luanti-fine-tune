@@ -12,9 +12,9 @@ Our research confirms this is the **first specialized LLM fine-tuning project fo
 | Project | Framework | Domain | Purpose | Link | Notes |
 |---------|-----------|--------|---------|------|-------|
 | **This work** | verifiers, prime-rl | **Luanti code generation** | **LLM fine-tuning** | [toddllm/luanti-fine-tune](https://github.com/toddllm/luanti-fine-tune) | **FIRST** |
-| Minetester | Custom RL | Minetest worlds | Agent training | [EleutherAI/minetest](https://github.com/EleutherAI/minetest) | Different domain |
-| Craftium | Gymnasium/PettingZoo | Minetest 3D | Visual RL | [mikelma/craftium](https://github.com/mikelma/craftium) | Different domain |
-| mtrl | Custom | Minetest | RL research | [neverix/mtrl](https://github.com/neverix/mtrl) | Different domain |
+| Minetest RL (mtrl) | Custom RL | Minetest worlds | Agent control | [neverix/mtrl](https://github.com/neverix/mtrl) | Different paradigm |
+| Minetester | Custom RL | Minetest worlds | Agent training | [EleutherAI/minetest](https://github.com/EleutherAI/minetest) | Different paradigm |
+| Craftium | Gymnasium/PettingZoo | Minetest 3D | Visual RL | [mikelma/craftium](https://github.com/mikelma/craftium) | Different paradigm |
 | Early GPT-3 | None | Minetest mods | Code gen attempt | [Forum discussion](https://forum.luanti.org/viewtopic.php?t=28311) | Limited, poor results |
 
 ## 🔍 **Search Results Summary**

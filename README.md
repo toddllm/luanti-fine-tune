@@ -120,7 +120,16 @@ ssh tdeshane@toddllm 'cd ~/luanti_capability && make verifiers'
 ## 🌟 **Prior Art & Community Position**
 
 ### **First in Category** 
-*To our knowledge, this is the first Minetest/Luanti environment integrated with the **verifiers** framework and evaluated via **prime-rl** (verified September 2025). We acknowledge prior work and will update comparative tables as other integrations emerge.*
+*To our knowledge (as of September 2025), this is the **first** Minetest/Luanti **code-generation** environment integrated with **verifiers/prime-rl** frameworks. Related Minetest work exists in **reinforcement learning** (e.g., Gym-like agent control via [neverix/mtrl](https://github.com/neverix/mtrl), EleutherAI alignment fork), which targets a different evaluation paradigm and research objective.*
+
+### **Prior Art (Minetest/Luanti)**
+
+- **Minetest RL (EleutherAI alignment fork)** — Gym-like environment for agent control (async/sync, single/multi-agent). Focus: RL interaction, not LLM code generation.  
+  Repo: [neverix/minetest](https://github.com/neverix/minetest) (EleutherAI alignment Minetest).  
+- **Craftium** — 3D visual RL environments using Minetest engine with Gymnasium/PettingZoo APIs.
+- **Our focus** — LLM code generation/repair for Luanti mods with pass@k, delivered as a `verifiers` environment and `prime-rl` scenarios for reproducible scoring and real-world checks.
+
+*Our work **complements** rather than **competes** with existing Minetest RL research: RL work trains agents to **use** Minetest functionality, while our work trains LLMs to **create** Minetest functionality.*
 
 ### **Credits & Dependencies**
 - **[Verifiers](https://github.com/willccbb/verifiers)** - LLM RL toolkit with environment framework
